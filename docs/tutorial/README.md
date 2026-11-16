@@ -40,10 +40,13 @@ The scaffold from `create-vite` is the only code committed directly to `main`.
 | React Hook Form, Zod | 7.90.0, 4.6.7 | Lesson 10, after the hand-built settings form in lesson 8. |
 | Web Audio API | browser built-in | Decoding, the playback clock, and beat analysis. No audio library. |
 | React Compiler | 1.0 | Off until lesson 12, so manual memoization comes first. |
-| Styling | Sass on BEMIT, your own tokens | Interviews do not test CSS method choice. |
+| Tailwind CSS, `@tailwindcss/vite` | 4.3.5 | Utility-first styling, the default in new React codebases. Your tokens live in `@theme`. |
+| shadcn/ui CLI, on Radix (`radix-ui`) | 4.23.0, 1.8.1 | The component library for the shell, editor, and hub. Source is copied into the repo, so you read and own it. The game board stays hand-built. |
 | Go | 1.27 | Standard library first. The one dependency is the pure-Go SQLite driver `modernc.org/sqlite`, so no C compiler is needed. |
 
 Why Vite over Next.js: Next.js is the most common React framework, but it wraps React in server rendering, Server Components, and its own routing and caching rules. Learning those at the same time as hooks blurs which rules belong to React. Vite first gives you React as most teams write their client code. Lesson 14 spends one evening on Server Components and Next.js.
+
+Why shadcn/ui on Radix: most React teams build on a component library, so you should know one well. shadcn/ui is the common choice in newer codebases, and it teaches both sides: Radix handles behavior and accessibility, and Tailwind handles the look, in source you can read and change. Its CLI can also sit on Base UI or React Aria; Radix is the one you will meet most in existing code. Lesson 13 compares the headless and styled approaches (MUI, Mantine) so you can talk about both.
 
 ## The game
 
@@ -65,21 +68,21 @@ One lesson, one PR. An evening is two to three focused hours.
 | # | Lesson | Idioms | Evenings |
 |---|---|---|---|
 | 1 | [Scaffold, test setup, first component](lessons/01-scaffold-and-first-component.md) | JSX, function components, typed props, `children`, the first RTL test, `getByRole` | 1 |
-| 2 | [UI primitives and a static board](lessons/02-primitives-and-static-board.md) | Composition, extending native props, `ref` as a prop, rendering a 2D grid with stable keys | 1 to 2 |
+| 2 | [Tailwind, shadcn/ui, and a static board](lessons/02-primitives-and-static-board.md) | Tailwind setup and `@theme` tokens, shadcn/ui init, reading `cn`, `cva`, and `asChild`, `ref` as a prop, rendering a 2D grid with stable keys | 2 |
 | 3 | [Game engine as pure TypeScript](lessons/03-game-engine.md) | Discriminated unions, immutable updates, a reducer with no React in it, unit tests | 2 |
 | 4 | [Playable board](lessons/04-playable-board.md) | `useReducer`, keyboard input in event handlers, state as a snapshot, derived values (ghost piece, next queue) | 1 to 2 |
 | 5 | [Game loop](lessons/05-game-loop.md) | `requestAnimationFrame` in an effect with cleanup, `useRef` for time, StrictMode double run, pause on hidden tab | 1 to 2 |
 | 6 | [Audio and the beat](lessons/06-audio-and-the-beat.md) | Accessible file drop, Web Audio API, `useSyncExternalStore` over the audio clock, custom hooks, timing judgment | 2 |
-| 7 | [Routing and shell](lessons/07-routing-and-shell.md) | Layout routes, `Outlet`, `NavLink`, `useParams`, `lazy` and `Suspense`, a class error boundary | 1 to 2 |
-| 8 | [Settings and context](lessons/08-settings-and-context.md) | Context versus props versus composition, memoized provider values, persisted settings, a hand-built controlled form, key remapping | 1 to 2 |
+| 7 | [Routing and shell](lessons/07-routing-and-shell.md) | Layout routes, `Outlet`, `NavLink`, `useParams`, `lazy` and `Suspense`, a class error boundary, a Radix alert dialog, mobile-first responsive utilities | 1 to 2 |
+| 8 | [Settings and context](lessons/08-settings-and-context.md) | Context versus props versus composition, memoized provider values, persisted settings, a controlled form from library controls, key remapping, dark mode and palettes as theme variables | 2 |
 | 9 | [Map editor timeline](lessons/09-editor-timeline.md) | Canvas through a ref, an effect that draws, undo and redo with a history reducer, beat detection as a pure function | 2 to 3 |
 | 10 | [Map format, import and export](lessons/10-map-format.md) | Zod schema and inferred types, React Hook Form, uncontrolled inputs, `crypto.subtle`, accessible validation errors | 1 to 2 |
-| 11 | [Map hub and leaderboards](lessons/11-map-hub-and-leaderboards.md) | MSW, TanStack Query, query keys, URL search params, `useMutation`, invalidation, optimistic updates, `useActionState` | 2 |
+| 11 | [Map hub and leaderboards](lessons/11-map-hub-and-leaderboards.md) | MSW, TanStack Query, query keys, URL search params, `useMutation`, invalidation, optimistic updates, `useActionState`, a library-built data table and toasts | 2 |
 | 12 | [Performance](lessons/12-performance.md) | Profiler during play, `memo`, moving per-frame visuals out of React state, `useDeferredValue`, React Compiler | 1 |
-| 13 | [Accessibility and test pass](lessons/13-accessibility-and-test-pass.md) | axe in tests, Game Accessibility Guidelines items, the WCAG 2.2 dragging alternative, live regions, MSW per-test overrides | 1 to 2 |
+| 13 | [Accessibility and test pass](lessons/13-accessibility-and-test-pass.md) | axe in tests, Game Accessibility Guidelines items, the WCAG 2.2 dragging alternative, live regions, MSW per-test overrides, a component library audit | 1 to 2 |
 | 14 | [Ship and interview prep](lessons/14-ship-and-interview-prep.md) | Production build, GitHub Pages, a README case study, one Next.js evening, timed drills | 2 to 3 |
 
-React total: 19 to 28 evenings.
+React total: 20 to 29 evenings.
 
 ## Go lessons
 
@@ -93,7 +96,7 @@ The Go track builds the real API behind the map hub and leaderboards, in a `serv
 | G4 | [Hardening](lessons/G4-hardening.md) | Body size limits, validation, CORS, rate limiting with a mutex, `log/slog`, graceful shutdown, `go test -race` | G3 | 1 to 2 |
 | G5 | [Wire up and deploy](lessons/G5-wire-up-and-deploy.md) | The front end switches from MSW to the API by environment, a Dockerfile, contract tests shared with the MSW handlers | G4 | 1 to 2 |
 
-Go total: 6 to 10 evenings. Together: 25 to 38 evenings, about five to seven weeks at five evenings a week.
+Go total: 6 to 10 evenings. Together: 26 to 39 evenings, about five to seven weeks at five evenings a week.
 
 Order: React 1 to 10, G1, React 11, G2 to G5, React 12 to 14.
 
@@ -108,8 +111,9 @@ Lesson 14 runs these timed, 30 to 45 minutes each, with no AI and no project cod
 5. A todo list with add, toggle, delete, and filter, all state immutable.
 6. A `useLocalStorage` custom hook with tests.
 7. Fix-the-bug: a component with a stale closure, a missing key, and an effect that should be derived state.
-8. Go: a worker pool that processes jobs and stops cleanly on `context` cancellation.
-9. Go: an HTTP handler with validation and a table-driven `httptest` test.
+8. Styling: rebuild a small responsive layout from a screenshot in Tailwind, mobile first.
+9. Go: a worker pool that processes jobs and stops cleanly on `context` cancellation.
+10. Go: an HTTP handler with validation and a table-driven `httptest` test.
 
 ## React questions worth answering in one line
 
@@ -198,6 +202,18 @@ Say them in your own words; a memorized answer is easy to spot.
 - `getBy`, `queryBy`, or `findBy`? `getBy` asserts presence, `queryBy` asserts absence, `findBy` waits for async content.
 - Why `user-event` over `fireEvent`? It simulates real interaction sequences such as focus, keydown, input, and keyup.
 - How do you mock the network? MSW intercepts requests, so components run their real fetching code.
+
+**Styling and component libraries**
+
+- What is utility-first CSS? Small single-purpose classes composed in the markup instead of named component classes in a stylesheet.
+- Why do teams pick Tailwind? No naming or dead CSS to manage, consistent spacing and color from the theme, and styles that live next to the markup they affect.
+- What is the common complaint? Long class strings; the answer is extracting components, not `@apply` everywhere.
+- Why can't you build class names from parts? Tailwind scans source for whole class names, so a constructed name is never generated.
+- What does `tailwind-merge` do? Resolves conflicting utilities so the last one wins, which lets callers override a component's defaults.
+- Headless or styled library? Headless (Radix, React Aria, Base UI) gives behavior and accessibility with your styling; styled (MUI, Mantine) gives a finished look that is harder to change.
+- What is different about shadcn/ui? It copies component source into your repo, so you own and edit it instead of upgrading a package.
+- What does `asChild` do? Merges a component's props and behavior onto its single child, so a button can render as a link.
+- Does an accessible component library make an app accessible? No; it covers each widget's behavior, and you still own labels, contrast, focus order, and page structure.
 
 **Accessibility**
 

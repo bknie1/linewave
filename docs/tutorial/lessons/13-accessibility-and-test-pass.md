@@ -26,10 +26,16 @@ Read first: W3C "What's New in WCAG 2.2". Game Accessibility Guidelines, Basic a
 4. Announcements: a polite live region for combo milestones and line clears, throttled so it never floods, and a full summary at the end of a song.
 5. Manual pass, written up in the PR: keyboard only through menu, library, editor, hub, and settings; then the same with NVDA or Narrator; then one song with the sound off.
 6. Test gaps: run coverage, list the uncovered branches that matter, and cover them. Do not chase a percentage.
+7. Component library audit, written up in `docs/library-notes.md`:
+   - What Radix handled for you in each shadcn/ui component you used (focus, keyboard, ARIA).
+   - What you still had to fix: contrast of your theme variables in both themes, target sizes, visible focus, labels.
+   - One component where you changed the generated source, and why.
+   - When you would pick a headless library (Radix, React Aria, Base UI), a styled one (MUI, Mantine), or your own.
 
 ## PR questions
 
 1. What did axe miss that the manual pass caught?
 2. Which parts of play cannot be made screen-reader accessible, and how do you state that honestly on the about page?
 3. Which test would you show an interviewer as your best example, and why?
+4. Does using an accessible component library make an app accessible? Answer from what your audit found.
 

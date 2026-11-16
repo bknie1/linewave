@@ -19,6 +19,8 @@ Read first: react.dev "You Might Not Need an Effect" (the fetching section). Tan
 3. The right way:
    - `QueryClientProvider` at the root and a query key factory in one file.
    - The hub is a searchable, filterable, sortable, paginated table. Its state lives in the URL through `useSearchParams`. It uses `placeholderData: keepPreviousData` so paging does not flash empty.
+   - Build it from shadcn/ui `table`, `input`, `select`, `pagination`, and `skeleton`. Sortable column headers are buttons inside the `<th>`, with `aria-sort` on the `<th>`.
+   - A failed favorite or publish shows a toast through shadcn/ui's `sonner`, and the message is also announced.
    - Map detail shows the map's info, its top scores, and whether the player has the matching song.
    - Publish from the editor with `useMutation`; on success, invalidate the hub lists.
    - Favorite is optimistic: `onMutate` updates the cache, `onError` rolls back, `onSettled` invalidates.
@@ -38,4 +40,5 @@ Read first: react.dev "You Might Not Need an Effect" (the fetching section). Tan
 1. What was the bug in the `useEffect` version, and what does TanStack Query handle that your fix did not?
 2. What is the difference between `staleTime` and `gcTime`, and what did you set?
 3. When would you use `useActionState` over React Hook Form, and the reverse?
+4. shadcn/ui's data table recipe uses TanStack Table. Read it. Would it have helped here, given that sorting and paging happen on the server?
 

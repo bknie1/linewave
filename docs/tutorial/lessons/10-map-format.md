@@ -17,7 +17,8 @@ Read first: Zod docs (Basic usage, Type inference, Error handling). React Hook F
 2. `hashAudio(file)` using `crypto.subtle.digest('SHA-256', ...)`, returning hex.
 3. Map details form in the editor, on React Hook Form with the Zod resolver:
    - Title, artist, mapper, and difficulty, with title and artist prefilled from the file name so the player does not type what the app can guess.
-   - Native inputs use `register`. Use `Controller` only where you must, and say where.
+   - Native inputs use `register`. Use `Controller` only where you must, and say where. The shadcn/ui `select` for difficulty is one place you must, since it is not a native input.
+   - Lay the fields out with shadcn/ui's field components (see its React Hook Form page) so labels, descriptions, and errors are connected the same way everywhere.
    - Keep the accessibility behavior from lesson 8: `aria-invalid`, `aria-describedby`, and focus to the first error.
 4. Export downloads `<title>.map.json`.
 5. Import:

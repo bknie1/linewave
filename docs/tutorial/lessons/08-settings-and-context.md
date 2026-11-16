@@ -15,12 +15,14 @@ Read first (react.dev, Learn): Passing Data Deeply with Context, Scaling Up with
    - Reduced motion `'system'` resolves through `useMediaQuery('(prefers-reduced-motion: reduce)')`.
    - The context value is memoized. Settings and the update function may be split into two contexts; say whether you did and why.
    - `useSettings()` throws a clear error outside the provider.
-3. Settings form at `/settings`, hand-built:
-   - A draft copy in `useReducer`, with controlled inputs, Save, and Cancel.
+3. Settings form at `/settings`, wired by hand (no form library yet) from shadcn/ui controls: `label`, `switch`, `select`, `radio-group`, and `slider`.
+   - A draft copy in `useReducer`, with controlled controls, Save, and Cancel.
+   - Radix controls are not native inputs. They are controlled through `checked` and `onCheckedChange`, or `value` and `onValueChange`, not `onChange`. Learn each one's API from its docs page.
    - Key remapping: activate a binding, press a key to capture it, Escape cancels. A key already bound elsewhere shows an error naming the conflict.
    - Errors use `aria-invalid` and `aria-describedby`. On save with errors, focus moves to an error summary.
 4. Latency calibration: a metronome plays, the player taps along for 16 beats, and the average offset becomes the latency setting.
 5. The game, the beat judgment, and the board styles read settings from context.
+6. Theme: light, dark, or system. The provider toggles a `dark` class on `<html>`, and Tailwind's `dark:` variant follows it (see the shadcn/ui dark mode guide for Vite). The palettes are sets of theme variables swapped by a class, so components never branch on the palette.
 
 ## Rules for this lesson
 
@@ -33,6 +35,7 @@ Read first (react.dev, Learn): Passing Data Deeply with Context, Scaling Up with
 - Capturing a key rebinds it, and a conflict shows the error.
 - With reduced motion `'system'`, a mocked `matchMedia` change flips the resolved value.
 - Calibration with fake taps 20 ms late sets the offset to about 20.
+- Choosing a palette and a theme through the Radix `Select` and `RadioGroup` updates the draft. jsdom lacks some browser APIs Radix calls (pointer capture, `scrollIntoView`); stub them in the test setup file and note which ones you needed.
 
 ## PR questions
 

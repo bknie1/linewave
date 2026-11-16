@@ -37,12 +37,16 @@ React:
 6. `useLocalStorage` hook with tests.
 7. Fix-the-bug: stale closure, missing key, and an effect that should be derived state.
 
+Styling:
+
+8. Rebuild a small responsive layout from a screenshot in Tailwind: a pricing card row or a settings panel, mobile first.
+
 Go:
 
-8. A worker pool that processes jobs and stops cleanly on `context` cancellation.
-9. An HTTP handler with validation and a table-driven `httptest` test.
+9. A worker pool that processes jobs and stops cleanly on `context` cancellation.
+10. An HTTP handler with validation and a table-driven `httptest` test.
 
-Then a mock interview: 15 questions drawn at random from both question lists in the tutorial README, answered without notes.
+Then a mock interview: 15 questions drawn at random from the question lists in the tutorial README, answered without notes.
 
 ## Done when
 
