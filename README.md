@@ -1,7 +1,32 @@
-# Linewave
+# React + TypeScript + Vite
 
-An original rhythm block-clearing game with a beatmap editor, built to learn React, TypeScript, and Go.
+This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
 
-Blocks fall on the beat. Moves made on the beat build a combo, and line clears on the beat score a bonus. Players bring their own music, which never leaves their device; maps hold timing data only, so the game shares maps and never music.
+Currently, two official plugins are available:
 
-The game is built one lesson at a time, one pull request per lesson. The plan and every lesson are in [docs/tutorial](docs/tutorial/README.md).
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+
+## React Compiler
+
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+
+## Expanding the Oxlint configuration
+
+If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+
+```json
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["react", "typescript", "oxc"],
+  "options": {
+    "typeAware": true
+  },
+  "rules": {
+    "react/rules-of-hooks": "error",
+    "react/only-export-components": ["warn", { "allowConstantExport": true }]
+  }
+}
+```
+
+See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
